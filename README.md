@@ -50,3 +50,21 @@ python main.py
 - **Python**: Lenguaje de programación principal.
 - **Pandas**: Biblioteca de Python para manipulación y análisis de datos.
 - **requests_html**: Biblioteca de uso simplificado para la realización de *Web Scraping*
+
+## LICENCIA
+
+El código fuente del proyecto se publica bajo la licencia [CC BY-NC-SA 4.0.](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en).  
+
+El dataset resultante de este proyecto se publica bajo la licencia **CC0: Public Domain License**.  
+
+## Reconocimientos
+
+**Reconocimiento del origen de los datos y aspectos éticos:**   
+ Los datos extraídos provienen de [Pricecharting.com](https://www.pricecharting.com/), un sitio web que ofrece información pública sobre precios de videojuegos.  
+ Al liberar el dataset al dominio público, se reconoce que los datos originales no son propiedad del autor de este proyecto.
+
+**Promoción del acceso abierto:**  
+CC0 facilita el acceso y la reutilización de los datos, fomentando la investigación, el análisis y la creación de nuevas aplicaciones.
+
+**Limitación de la extracción de datos:**  
+Como Pricecharting.com ofrece una API premium para acceder a sus datos, se ha limitado la cantidad de información extraída para este proyecto, como muestra de respeto a su modelo de negocio.
