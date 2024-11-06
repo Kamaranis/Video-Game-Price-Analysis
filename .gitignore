@@ -1,0 +1,25 @@
+# Archivos temporales
+*.tmp
+temp/
+
+# Entorno virtual
+env/
+venv/
+
+# Archivos de caché de Python
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+
+# Archivos de configuración
+*.ini
+*.cfg
+
+# Archivos de base de datos
+*.db
+
+# Archivos de compilación
+*.pyo
+*.pyd

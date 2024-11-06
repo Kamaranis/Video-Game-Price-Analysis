@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&iquest;C&oacute;mo podemos capturar los datos de la web&quest;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <figure style="width: 100%; clear: both;">
+    <div style="display: flex; justify-content: center; width: 100%;">
+       <img src="https://syw.under.jp/img/logo_PR1_tipologia.png" align="center">
+    </div>
+    <figcaption><i><b>Alumno</b>: Anton Barrera Mora (abarreramoraùoc.edu)</i>.</figcaption>
+</figure>
+<h1 id="cómo-podemos-capturar-los-datos-de-la-web">¿Cómo podemos capturar los datos de la web?</h1>
+<h4 id="indice">Indice</h4>
+<ul>
+<li><a href="#c%C3%B3mo-podemos-capturar-los-datos-de-la-web">¿Cómo podemos capturar los datos de la web?</a>
+- <a href="#indice">Indice</a>
+<ul>
+<li><a href="#1-contexto">1. Contexto</a>
+<ul>
+<li><a href="#vgchartz">VGChartz</a></li>
+<li><a href="#pricecharting">PriceCharting</a>
+<ul>
+<li><a href="#conclusiones-del-an%C3%A1lisis-preliminar-de-pricechartingcom-para-web-scraping">Conclusiones del Análisis Preliminar de Pricecharting.com para Web Scraping</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#2-t%C3%ADtulo">2. Título</a></li>
+<li><a href="#3-descripci%C3%B3n-del-dataset">3. Descripción del dataset</a></li>
+<li><a href="#4-representaci%C3%B3n-gr%C3%A1fica">4. Representación gráfica</a></li>
+<li><a href="#5-contenido">5. Contenido</a></li>
+<li><a href="#6-propietario">6. Propietario</a></li>
+<li><a href="#7-inspiraci%C3%B3n">7. Inspiración</a></li>
+<li><a href="#8-licencia">8. Licencia</a>
+<ul>
+<li><a href="#dataset">Dataset</a></li>
+<li><a href="#c%C3%B3digo-fuente">Código Fuente</a></li>
+</ul>
+</li>
+<li><a href="#9-c%C3%B3digo">9. Código</a></li>
+<li><a href="#10-dataset">10. Dataset</a></li>
+<li><a href="#11-video">11. Video</a></li>
+<li><a href="#bibliograf%C3%ADa">Bibliografía</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="1-contexto">1. Contexto</h2>
+<p>En este apartado describiremos de forma general, el proceso seguido para desarrollar el presente trabajo de Web Scraping.</p>
+<p>Este proyecto nació con un enfoque lúdico, orientado a realizar <strong>web scraping</strong> en sitios web del ámbito del entretenimiento (videojuegos, juegos de mesa, libros y cartas coleccionables). Esta elección temática responde a un interés personal por explorar áreas más recreativas, como contrapunto a la actividad profesional cotidiana en el sector IT.</p>
+<p>La selección del tema para la &quot;Práctica 1&quot; (PR1) de la asignatura <strong>Tipología y Ciclo de Vida de los Datos</strong> se realizó considerando tres criterios fundamentales:</p>
+<ol>
+<li>El área de interés personal.</li>
+<li>La disponibilidad y accesibilidad de datos en sitios web.</li>
+<li>La viabilidad para realizar un análisis significativo que cumpliera con los requisitos de la práctica.</li>
+</ol>
+<p>Todo el proceso se ha desarrollado prestando especial atención a los aspectos técnicos y éticos inherentes al web scraping, garantizando así un trabajo riguroso y profesional.</p>
+<p>El proceso de trabajo puede consultarse íntegramente en el documento incluido en el <a href="https://colab.research.google.com/github/Kamaranis/Web-Scraping-de-videojuegos-con-potencial-de-revalorizacion/blob/main/PR1_web_scraping_colab.ipynb">repositorio de la práctica</a>, un notebook de Google Colab.</p>
+<p>En este documento puede observarse que el primer paso fue <strong>obtener un listado de sitios web</strong> relacionados con la temática seleccionada.<br>
+Trabajamos sobre estos sitios web inicialmente para conocer que posibilidades y limitaciones ofrecian:</p>
+<ol>
+<li>
+<p><strong><a href="https://steamdb.info/">SteamDB</a></strong><br>
+Base de datos de la plataforma Steam. Aunque la API de SteamDb limita parte de los datos accesibles, es posible obtener información sobre los videojuegos disponibles. Cuenta con API de pago.</p>
+</li>
+<li>
+<p><strong><a href="https://boardgamegeek.com/">BoardGameGeek</a></strong><br>
+Información sobre juegos de mesa, con datos sobre la puntuación, complejidad y la mecánica de los juegos, entre otros aspectos.</p>
+</li>
+<li>
+<p><strong><a href="https://www.metacritic.com/game/">Metacritic Video Games</a></strong><br>
+Recopilación de reseñas de videojuegos, donde se asigna una puntuación media tanto por parte de la crítica especializada como de los usuarios. Incluye datos como el nombre del juego, la plataforma, la fecha de lanzamiento y el género.</p>
+</li>
+<li>
+<p><strong><a href="https://howlongtobeat.com/">Howlongtobeat</a></strong><br>
+Proporciona estimaciones sobre la duración de los videojuegos, tanto para completar la historia principal como para lograr un 100% de finalización.</p>
+</li>
+<li>
+<p><strong><a href="https://www.vgchartz.com/">VGChartz</a></strong><br>
+Información sobre ventas de videojuegos, incluyendo el número de unidades vendidas por plataforma y región.</p>
+</li>
+<li>
+<p><strong><a href="https://www.pricecharting.com/">PriceCharting</a></strong><br>
+Rastrea el precio histórico de videojuegos, consolas, juegos de mesa y cartas coleccionables, facilitando un análisis sobre la evolución de los precios a lo largo del tiempo. Cuenta con una API y funciones de pago que no parecen interferir en el Web Scraping.</p>
+</li>
+</ol>
+<p>Cabe destacar que se trataba de sitios web en inglés a excepción de <a href="http://www.pricecharting.com">www.pricecharting.com</a> que cuenta con traducción a diversos idiomas, incluido el español.</p>
+<p>Posteriormente se procedió a una segunda fase que denominamos <strong>evaluación preliminar</strong> de la viabilidad del scraping en estos sitios. El objetivo era valorar las restricciones técnicas, legales y la accesibilidad de los datos mediante un <strong>análisis de los archivos</strong> <code>robots.txt</code> cuidadoso con base en el listado completo anteriormente referenciado.</p>
+<p>Como resultado de este análisis del archivo <a href="https://www.pricecharting.com/robots.txt">robots.txt</a> del sitio web finalmente escogido para esta práctica (<a href="https://www.pricecharting.com">PriceCharting.com</a>) concluimos que esta web bloquea el acceso a secciones relacionadas con la gestión de cuentas, la publicación de ofertas y la compra de productos.  Se tratan de secciones del sitio web dinámicas y personalizadas para cada usuario. Para el web scraping de información de precios, el archivo robots.txt no presentaba restricciones.  En un principio todo parecía indicar que se podría acceder a las páginas de productos y extraer la información, siempre de forma responsable y ética.</p>
+<p>El resto de sitios web a excepción del <a href="https://www.vgchartz.com/robots.txt">'robots.txt' de VGchartz </a> presentaban restricciones de diversa índole que llevaron a sus descartes en esta fase. Consecuentemente, procedimos a una tercera fase de <strong>Análisis preliminar</strong> con solo dos candidatos: &quot;<a href="http://pricecharting.com">pricecharting.com</a>&quot; y &quot;<a href="http://vgchartz.com">vgchartz.com</a>&quot;, respectivamente. Análisis preliminar que desglosamos a continuación:</p>
+<h3 id="vgchartz">VGChartz</h3>
+<p>Se efectuó un análisis preliminar del sitio web como puede observarse en el <a href="https://colab.research.google.com/github/Kamaranis/Web-Scraping-de-videojuegos-con-potencial-de-revalorizacion/blob/main/PR1_web_scraping_colab.ipynb">documento de trabajo</a> que tuvo como objetivo evaluar la factibilidad y los desafíos de realizar web scraping en el sitio web VGChartz (<a href="https://www.vgchartz.com">www.vgchartz.com</a>) empleando diversas herramientas y técnicas de análisis. Finalmente descartamos este sitio, pero a modo de resumen, detallamos los hallazgos:</p>
+<p><strong>Análisis de tecnologías:</strong></p>
+<p>Mediante la librería <code>builtwith</code> de Python, se identificó que VGChartz utiliza <code>PHP</code> como lenguaje de programación principal, lo que conlleva generación dinámica de contenido.  Esto implica que la información de interés no estará embebida directamente en el código HTML, sino que se obtendrá a través de peticiones a una base de datos subyacente. La presencia de <code>jQuery</code> como framework de <code>JavaScript</code> refuerza esta hipótesis, ya que facilita la implementación de peticiones AJAX para la carga dinámica de contenido.</p>
+<p><strong>Inspección de la actividad de red:</strong></p>
+<p>Un análisis de la actividad de red con las herramientas de desarrollo del navegador, específicamente la pestaña &quot;Red&quot; con el filtro &quot;XHR/Fetch&quot; activado, confirma la naturaleza dinámica del sitio web.  Se observan múltiples peticiones asíncronas a archivos PHP, como <code>outgamescore.php</code> y <code>gamerelatednews.php</code>, que sugieren la interacción con la base de datos para obtener y renderizar la información en la página.</p>
+<figure style="width: 60%; clear: both;">
+    <div style="display: flex; justify-content: center; width: 50%;">
+       <img src="https://syw.under.jp/img/VGChartz_DevTool.png" align="center">
+    </div>
+    <figcaption><i>Vista de las 'DEV Tolls' en el sitio vgchartz.com</i>.</figcaption>
+</figure>
+<p><strong>Tamaño del sitio web:</strong></p>
+<p>El análisis del sitio web nos permite vislumbrar que este es un sitio web masivo en cuanto a numero de paginas, 175.000 lo que supone un reto añadido al reto que supone en sí mismo el stack empleado.</p>
+<p><strong>Análisis del archivo robots.txt:</strong></p>
+<p>El archivo robots.txt de VGChartz se muestra permisivo, permitiendo el acceso a todas las secciones del sitio web.  Sin embargo, esto no descarta la posible implementación de otras medidas anti-scraping, como la detección de patrones de acceso o el bloqueo de IPs.</p>
+<p><strong>Información WHOIS:</strong></p>
+<p>La consulta WHOIS revela que el dominio VGChartz se registró en 2007, lo que sugiere una larga trayectoria y una posible complejidad en la estructura del código.  Si bien esta no aporta detalles técnicos relevantes para el web scraping, contextualiza la antigüedad del sitio web y su gestión.</p>
+<p><strong>Consideraciones para el web scraping:</strong></p>
+<ul>
+<li><strong>Contenido dinámico:</strong> La utilización de <code>PHP</code> y <code>jQuery</code> implica la necesidad de emplear técnicas de web scraping que manejen la renderización de JavaScript y la extracción de datos de peticiones AJAX.  Herramientas como <em>Scrapy</em> y análogas, con capacidad para procesar JavaScript y simular la interacción del usuario, serian inevitables en este trabajo.</li>
+<li><strong>Posibles medidas anti-scraping:</strong>  A pesar de la permisividad del archivo 'robots.txt', se debe considerar la posibilidad de encontrar medidas anti-scraping.  Será necesario monitorear el comportamiento del sitio durante el proceso y adaptar la estrategia en consecuencia.</li>
+<li><strong>Inspección del código fuente:</strong>  Un análisis detallado del código fuente de las páginas sería fundamental para comprender la estructura de la información y la forma en que se cargan los datos dinámicos.  Esto permitiría identificar los selectores <code>CSS</code> o <code>XPath</code> empleados en la extracción de datos dependiendo de la librería a emplear, énfasis con <code>Scrapy</code>, aunque finalmente hemos descartado trabajar sobre este sitio web. Principalmente porque a priori parece haber alternativas con menos complicaciones y mejores fuentes de datos como es el caso de <a href="http://Pricecharting.com">Pricecharting.com</a>.</li>
+</ul>
+<h3 id="pricecharting">PriceCharting</h3>
+<p>PRICE charting tiene activo el <a href="https://www.pricecharting.com/sitemap.xml">sitemap</a> que permitiría afinar el código para realizar el scraping solo sobre las páginas relevantes para el proyecto, como puede observarse en la imagen:</p>
+<figure style="width: 80%; clear: both;">
+    <div style="display: flex; justify-content: center; width: 50%;">
+       <img src="https://syw.under.jp/img/price_xml.png" align="center">
+    </div>
+    <figcaption><i>Vista del código XML del sitemap de Pricecharting.com</i>.</figcaption>
+</figure>
+<p>La inspección de Pricecharting con las herramientas de desarrollo del navegador (Dev Tools) revelan un comportamiento distinto al observado en VGChartz en cuanto a la carga de la información de precios.</p>
+<figure style="width: 60%; clear: both;">
+    <div style="display: flex; justify-content: center; width: 50%;">
+       <img src="https://syw.under.jp/img/price_dev_tool.png" align="center">
+    </div>
+    <figcaption><i>Vista de las 'Dev Tools' en PriceCharting.com</i>.</figcaption>
+</figure>
+<p>El análisis con las 'Dev Tools' revela que muy posiblemente el sitio utilice JavaScript embebido. La información de precios podría estar presente en el código HTML, ya sea incrustada en etiquetas HTML o como atributos de datos en elementos HTML. El JavaScript de la página se encargaría de procesar y mostrar la información sin necesidad de realizar peticiones adicionales al servidor.</p>
+<p>Respecto al tamaño, empleando 'site:<a href="https://www.pricecharting.com/es/">https://www.pricecharting.com/es/</a>' en el buscador y como puede observarse, obtenemos que este sitio web tiene aproximadamente, <strong>183.000 paginas</strong>.</p>
+<figure style="width: 100%; clear: both;">
+    <div style="display: flex; justify-content: center; width: 50%;">
+       <img src="https://syw.under.jp/img/gl_site_Pchart.png" align="center">
+    </div>
+    <figcaption><i>Estimación del tamaño del sitio web pricecharting.com usando Google.com</i>.</figcaption>
+</figure>
+<p>Asimismo, para obtener información sobre las tecnologías utilizadas en <a href="https://www.pricecharting.com/es/">https://www.pricecharting.com/es/</a> , empleamos la librería de Python <code>builtwith</code>:</p>
+<pre><code>import builtwith
+import pprint
+
+# Creamos un diccionario para guardar los resultados
+informacion_sitio = builtwith.parse('https://www.pricecharting.com/')
+
+# Imprimimos la información con pprint
+pprint.pprint(informacion_sitio)
+
+# RESULTADOS:
+
+{'javascript-frameworks': ['jQuery', 'jQuery UI'],
+ 'web-servers': ['Google App Engine']}
+</code></pre>
+<p>Pricecharting está alojado en Google App Engine y utiliza tecnologías Javascript para mostrar contenidos sin necesidad de recargar la pagina.<br>
+Esto tiene varias connotaciones para el web scraping, algunas positivas y otras que podrían presentar desafíos.</p>
+<p><strong>Posibles ventajas:</strong></p>
+<ul>
+<li>Escalabilidad y rendimiento: Google App Engine está diseñado para escalar automáticamente en función del tráfico, lo que significa que el sitio web debería ser capaz de manejar un gran número de peticiones sin problemas de rendimiento.</li>
+<li>Infraestructura robusta: Google App Engine ofrece una infraestructura seria de alta disponibilidad y protección contra ataques DDoS. Ello conlleva implícitamente que el sitio web debería estar accesible sin problemas, lo que facilitaría web scraping continuo.</li>
+<li>Posible uso de APIs: Google App Engine facilita la creación y el despliegue de APIs. Pricecharting ofrece una API para acceder a los datos pero que afectos de esta practica, no podremos utilizar</li>
+</ul>
+<p><strong>Probables desafíos:</strong></p>
+<ul>
+<li>
+<p>Protección contra web scraping: Google App Engine ofrece herramientas y servicios para proteger las aplicaciones contra el web scraping, como la detección de patrones de acceso, el bloqueo de IPs y la integración con reCAPTCHA. No cabe duda de que Pricecharting podría estar utilizando algunas de estas medidas, lo que dificultaría el trabajo.</p>
+</li>
+<li>
+<p>Limitaciones de acceso: Google App Engine puede imponer limitaciones en el número de peticiones que se pueden realizar a una aplicación, especialmente teniendo en cuenta que tiene API.
+Al poseer una API de pago, es muy probable que el intento de web scrap finalice en resultados limitados, como puede observarse en la captura al pie.</p>
+</li>
+</ul>
+<figure style="width: 80%; clear: both;">
+    <div style="display: flex; justify-content: center; width: 50%;">
+       <img src="https://syw.under.jp/img/pricechart_api.png" align="center">
+    </div>
+    <figcaption><i>Limitaciones de acceso a la API de Pricecharting</i>.</figcaption>
+</figure>
+<ul>
+<li>Cambios en la infraestructura: Google suele implementar cambios en las condiciones e infraestructuras, afectando al Web Scraping. Aunque solo necesitamos realizar puntualmente Scraping para esta practica, en un contexto laboral, en un futuro, el diseño del Scraper podría quedar inservible.</li>
+</ul>
+<p>Vamos a realizar un <code>whois</code> para conocer al propietario y otros detalles, de figurar esta información:</p>
+<pre><code>import whois
+
+# Realizamos el query
+pprint.pprint(whois.whois('https://www.pricecharting.com/'))
+
+RESULTADOS:
+
+{'address': 'REDACTED FOR PRIVACY',
+ 'city': 'REDACTED FOR PRIVACY',
+ 'country': 'US',
+ 'creation_date': datetime.datetime(2010, 7, 23, 19, 18, 48),
+ 'dnssec': 'unsigned',
+ 'domain_name': ['PRICECHARTING.COM', 'pricecharting.com'],
+ 'emails': 'abuse-complaints@squarespace.com',
+ 'expiration_date': datetime.datetime(2025, 7, 23, 19, 18, 48),
+ 'name': 'REDACTED FOR PRIVACY',
+ 'name_servers': ['NS-CLOUD-B1.GOOGLEDOMAINS.COM',
+                  'NS-CLOUD-B2.GOOGLEDOMAINS.COM',
+                  'NS-CLOUD-B3.GOOGLEDOMAINS.COM',
+                  'NS-CLOUD-B4.GOOGLEDOMAINS.COM',
+                  'ns-cloud-b3.googledomains.com',
+                  'ns-cloud-b4.googledomains.com',
+                  'ns-cloud-b1.googledomains.com',
+                  'ns-cloud-b2.googledomains.com'],
+ 'org': 'Video Game Price Charts, LLC',
+ 'referral_url': None,
+ 'registrant_postal_code': 'REDACTED FOR PRIVACY',
+ 'registrar': 'Squarespace Domains II LLC',
+ 'state': 'CO',
+ 'status': ['clientDeleteProhibited '
+            'https://icann.org/epp#clientDeleteProhibited',
+            'clientTransferProhibited '
+            'https://icann.org/epp#clientTransferProhibited',
+            'clientTransferProhibited '
+            'http://www.icann.org/epp#clientTransferProhibited',
+            'clientDeleteProhibited '
+            'http://www.icann.org/epp#clientDeleteProhibited'],
+ 'updated_date': [datetime.datetime(2024, 7, 8, 22, 46, 11),
+                  datetime.datetime(2024, 7, 8, 22, 46, 11, 510181)],
+ 'whois_server': 'whois.squarespace.domains'}
+</code></pre>
+<p>La consulta WHOIS realizada sobre el dominio <a href="http://pricecharting.com">pricecharting.com</a>, utilizando la librería whois de Python, proporciona información relevante sobre el sitio web, aunque no aporta detalles técnicos que tengan una importancia diferencial en la estrategia de web scraping.</p>
+<p><strong>Información relevante:</strong></p>
+<ul>
+<li>Fecha de creación: El dominio se registró en julio de 2010. Ello supone una presencia establecida en la web. Si bien no es un factor determinante, la antigüedad del sitio web podría sugerir una mayor complejidad en su estructura y la posible implementación de medidas anti-scraping a lo largo del tiempo.</li>
+<li>Fecha de expiración: El dominio expira en julio de 2025, confirmando la continuidad de las operaciones del sitio.
+Organización: El dominio está registrado a nombre de &quot;Video Game - Price Charts, LLC&quot;, una entidad.</li>
+<li>Registrador: El registrador del dominio es <em>'Squarespace Domains II LLC'</em>.</li>
+<li>Servidores de nombres: Servidores de nombres de &quot;Google Domains&quot;, lo que podría estar relacionado con el alojamiento del sitio web en Google App Engine.</li>
+<li>Estado del dominio: Implementa medidas de seguridad comunes para proteger la propiedad del dominio.</li>
+</ul>
+<p><strong>Implicaciones para el web scraping:</strong></p>
+<p>Aunque la información reseñada no proporciona detalles técnicos sobre la tecnología del sitio web, algunos aspectos pueden ser relevantes:</p>
+<ul>
+<li>Antigüedad: La trayectoria de Pricecharting sugiere la posibilidad de que se hayan implementado medidas anti-scraping a lo largo del tiempo.</li>
+<li>Infraestructura del servidor: El uso de servidores de nombres de Google Domains indica una infraestructura robusta y escalable, lo influye en la velocidad y capacidad de respuesta del servidor y manejar múltiples peticiones HTTPS.</li>
+</ul>
+<p>Realizamos un acercamiento de prueba al Web Scraping:</p>
+<pre><code>import requests
+from bs4 import BeautifulSoup
+
+url: str = (&quot;https://www.pricecharting.com/es/category/video-games&quot;)
+sitio = requests.get(url)
+print(&quot;Codigo HTTP:&quot;, sitio.status_code)
+print(&quot;El contenido de la pagina en bruto:&quot;)
+# pprint.pprint(sitio.content)
+# Evito usar esta ultima linea por su verbosidad
+
+RESULTADO:
+
+Codigo HTTP: 200
+</code></pre>
+<p>El código 200 nos indica que se ha producido la respuesta a la petición HTTP.<br>
+Continuamos analizando el contenido de la página:</p>
+<pre><code># Parseamos el contenido con 'BeatifulSop'
+price_chart_parsed = BeautifulSoup(sitio.content)
+# Imprimimos el contenido de forma legible con la función `prettify`:
+print(price_chart_parsed.prettify())
+</code></pre>
+<p>Observamos que la subpágina de <a href="http://Pricecharting.com">Pricecharting.com</a> referida a video juegos en Español nos proporciona los enlaces a los videojuegos clasificados por sistemas como puede observarse en el código HTML:</p>
+<pre><code>&lt;ul&gt;
+        &lt;li&gt;
+         &lt;a href=&quot;/es/console/xbox&quot; title=&quot;Xbox&quot;&gt;
+          Xbox
+         &lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+         &lt;a href=&quot;/es/console/sega-genesis&quot; title=&quot;Sega Genesis&quot;&gt;
+          Sega Genesis
+         &lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+         &lt;a href=&quot;/es/console/xbox-one&quot; title=&quot;Xbox One&quot;&gt;
+          Xbox One
+         &lt;/a&gt;
+        &lt;/li&gt;
+        [...]
+&lt;/ul&gt;
+
+</code></pre>
+<p>En caso de raspar una página concreta como ejemplo empleando un enlace a videojuegos de 'PSOne' (<a href="https://www.pricecharting.com/es/console/playstation">https://www.pricecharting.com/es/console/playstation</a>), observaremos que los precios están referenciados en el mismo código HTML:</p>
+<pre><code>import requests
+from bs4 import BeautifulSoup
+url: str = (&quot;https://www.pricecharting.com/es/console/playstation&quot;)
+sitio = requests.get(url)
+# Parseamos el contenido con 'BeatifulSop'
+price_chart_parsed = BeautifulSoup(sitio.content)
+# Imprimimos el contenido de forma legible con la función `prettify`:
+print(price_chart_parsed.prettify())
+
+# RESULTADOS:
+[...]
+&lt;td class=&quot;title&quot; title=&quot;4280&quot;&gt;
+           &lt;a href=&quot;/es/game/playstation/breath-of-fire-3&quot;&gt;
+            Breath of Fire 3
+           &lt;/a&gt;
+          &lt;/td&gt;
+          &lt;td class=&quot;price numeric used_price&quot;&gt;
+           &lt;span class=&quot;js-price&quot;&gt;
+            $43.24
+           &lt;/span&gt;
+          &lt;/td&gt;
+          &lt;td class=&quot;price numeric cib_price&quot;&gt;
+           &lt;span class=&quot;js-price&quot;&gt;
+            $68.84
+           &lt;/span&gt;
+          &lt;/td&gt;
+          &lt;td class=&quot;price numeric new_price&quot;&gt;
+           &lt;span class=&quot;js-price&quot;&gt;
+            $322.82
+           &lt;/span&gt;
+          &lt;/td&gt;
+[...]
+</code></pre>
+<p>Pero asimismo detectamos un problema adicional, pues como es lógico, el sitio web implementa técnicas de <em>&quot;lazy load&quot;</em> y carga los resultados progresivamente a medida que el usuario hace <em>scroll</em> en la página que muestra en los resultados utilizando un script como puede observarse en el código:</p>
+<pre><code> &lt;form method=&quot;POST&quot; action=&quot;&quot; class=&quot;next_page js-next-page&quot;&gt;
+                        &lt;input type=&quot;hidden&quot; name=&quot;sort&quot; value=&quot;&quot; /&gt;
+</code></pre>
+<p>Este fragmento de código revela que la página utiliza JavaScript para cargar contenido dinámicamente a medida que el usuario interactúa con ella (en este caso, al hacer scroll). Esto implica que, si simplemente descargamos el HTML inicial con <code>urllib</code> o similares, solo obtendremos una parte de los datos, ya que el resto se carga posteriormente mediante JavaScript.<br>
+Para solucionar esto, deberemos utilizar otras estrategias para afrontar la carga dinámica del sitio web.</p>
+<h4 id="conclusiones-del-análisis-preliminar-de-pricechartingcom-para-web-scraping">Conclusiones del Análisis Preliminar de <a href="http://Pricecharting.com">Pricecharting.com</a> para Web Scraping</h4>
+<p>El análisis preliminar llevado a cabo con el objetivo de evaluar la factibilidad y los desafíos del web scraping, ha desvelado información clave sobre la arquitectura del sitio web y las tecnologías que lo componen. Los principales hallazgos y sus implicaciones para el proceso de <em>web scraping</em> podrían resumirse en:</p>
+<p><strong>Hallazgos principales:</strong></p>
+<ul>
+<li>
+<p><strong>Contenido dinámico y &quot;Lazy Load&quot;:</strong>  <a href="http://Pricecharting.com">Pricecharting.com</a> utiliza JavaScript para generar contenido dinámico, incluyendo la información de precios. Además, implementa <em>&quot;lazy load&quot;</em>, cargando los datos de los videojuegos a medida que el usuario hace scroll en la página. Esto requiere una solución de <em>web scraping</em> que pueda ejecutar JavaScript y simular la interacción del usuario para obtener la información completa.</p>
+</li>
+<li>
+<p><strong>Peticiones XHR para la carga dinámica:</strong> Se observa que la página utiliza peticiones XHR para cargar la información de precios de forma dinámica al hacer scroll.  Aunque los datos se muestran en el HTML, la carga de nuevos productos se realiza mediante peticiones XHR que se envían al servidor a medida que el usuario interactúa con la página.</p>
+</li>
+</ul>
+<figure style="width: 100%; clear: both;">
+    <div style="display: flex; justify-content: center; width: 50%;">
+       <img src="https://syw.under.jp/img/peticiones_script_pricecharting.com.png" align="center">
+    </div>
+    <figcaption><i>Estructura de las peticiones XHR para carga de datos en pricecharting.com</i>.</figcaption>
+</figure>
+<ul>
+<li>
+<p><strong>Alojamiento en Google App Engine:</strong> El sitio web está alojado en Google App Engine, lo que puede implicar la presencia de medidas anti-scraping y limitaciones de acceso, aunque en las pruebas realizadas no hayan surgido problemas técnicos.</p>
+</li>
+<li>
+<p><strong>API comercial:</strong>  <a href="http://Pricecharting.com">Pricecharting.com</a> ofrece una API comercial, pero queda descartada para este proyecto debido a restricciones del ejercicio.</p>
+</li>
+<li>
+<p><strong>Sitemap disponible:</strong> El sitio web proporciona un sitemap, que podría ser útil para identificar las URLs principales, pero no para la extracción completa de datos debido al <em>&quot;lazy load&quot;</em>.</p>
+</li>
+</ul>
+<p><strong>Implicaciones para el Web Scraping:</strong></p>
+<ul>
+<li><strong>Carga progresiva de datos:</strong>  Se requiere una herramienta o estrategia que permita simular el comportamiento del navegador con el objetivo de cargar todos los datos.</li>
+<li><strong>Análisis del código fuente:</strong>  El análisis del código fuente ha permitido identificar la estructura de la información y la lógica del uso del código JavaScript.</li>
+<li><strong>Consideración de medidas anti-scraping:</strong>  La presencia de medidas anti-scraping y uso de técnicas para evitar el bloqueo, como proxies y rotación de user-agents no queda descartado</li>
+<li><strong>Respeto a las limitaciones de acceso:</strong>  Es fundamental respetar las limitaciones de acceso y utilizar técnicas de web scraping éticas y responsables.</li>
+</ul>
+<p>Finalizamos este apartado reseñando que con toda la información analizada, <strong>nos decantamos por realizar Web Scrap sobre el sitio web<br>
+<a href="https://www.pricecharting.com/es/">www.pricecharting.com</a></strong><br>
+con base en que los datos que ofrece son relevantes para realizar diferentes trabajos de valoración de videojuegos, evolución de precios y los aspectos tanto técnicos como éticos son abordables.</p>
+<h2 id="2-título">2. Título</h2>
+<p>Web Scraping de Videojuegos con potencial de revalorización</p>
+<h2 id="3-descripción-del-dataset">3. Descripción del dataset</h2>
+<p>El dataset generado consiste en un conjunto de datos estructurados que recopilan información sobre videojuegos disponibles para las consolas <em>Xbox One</em> y <em>Xbox Series X</em>.  Este dataset se construyó a partir de la extracción de datos (web scraping) del sitio web <a href="http://Pricecharting.com">Pricecharting.com</a>, utilizando un script desarrollado en Python.</p>
+<p><strong>Características principales del dataset:</strong></p>
+<ul>
+<li>Estructura: Se organiza en un formato tabular. Cada fila representa un videojuego y cada columna una característica.</li>
+<li>Tamaño: El dataset contiene un total de 2369 filas o registros y 6 columnas.</li>
+<li>Fuente: Los datos se obtuvieron exclusivamente del sitio web <a href="http://Pricecharting.com">Pricecharting.com</a>.</li>
+<li>Fecha de extracción para archivos parciales: La fecha de extracción de los datos se registra en el nombre del archivo CSV generado (AAAA-MM-DD) en archivos parciales dependiendo de la plataforma, aunque el archivo final no la lleva impresa.</li>
+<li>La fecha de extracción es <strong>2024/11/05</strong>.</li>
+</ul>
+<p><strong>Usos del dataset:</strong></p>
+<p>Para nuestro <em>&quot;Análisis de la revalorización de videojuegos mediante web scraping&quot;</em>, el dataset desempeñará el siguiente papel:</p>
+<ul>
+<li>Identificar videojuegos con potencial de revalorización en las plataformas Xbox One y Xbox Series X.</li>
+<li>Analizar la evolución de los precios de los videojuegos desde su lanzamiento hasta la actualidad (año 2024).</li>
+<li>Calcular el porcentaje de revalorización de cada videojuego, considerando el precio de lanzamiento (&quot;Precio Nuevo&quot;) y los precios actuales (&quot;Precio Suelto&quot; y &quot;Precio CIB&quot;).</li>
+<li>Ayudar eventualmente a identificar los factores que influyen en la revalorización de los videojuegos, como la popularidad, la crítica y la escasez.</li>
+<li>Visualizar los resultados mediante gráficos y tablas que permitan identificar patrones y tendencias en la revalorización de los videojuegos.</li>
+</ul>
+<p><strong>Metodología:</strong></p>
+<ul>
+<li>Se realizó web scraping del sitio web <a href="http://Pricecharting.com">Pricecharting.com</a> para obtener información sobre los precios de los videojuegos.</li>
+<li>Se utilizó la librería <code>Requests-HTML</code> de Python para extraer los datos.</li>
+<li>El porcentaje de revalorización se calculará como la diferencia entre el precio actual y el precio de lanzamiento, dividida entre el precio de lanzamiento.</li>
+<li>Se crearán gráficos de líneas para visualizar la evolución de los precios a lo largo del tiempo, y gráficos de barras para comparar la revalorización entre diferentes juegos.</li>
+</ul>
+<p><strong>Limitaciones:</strong></p>
+<ul>
+<li><strong>Representatividad:</strong> El dataset solo incluye videojuegos listados en <a href="http://Pricecharting.com">Pricecharting.com</a>, por lo que puede no ser completamente representativo del mercado de videojuegos en su totalidad.</li>
+<li><strong>Sesgo geográfico:</strong> Los precios en <a href="http://Pricecharting.com">Pricecharting.com</a> pueden estar influenciados por la ubicación geográfica de los usuarios y vendedores, lo que podría introducir un sesgo en los datos.</li>
+<li><strong>Actualización:</strong> Los precios de los videojuegos son dinámicos, por lo que el dataset requiere actualizaciones periódicas para mantener su validez.</li>
+</ul>
+<h2 id="4-representación-gráfica">4. Representación gráfica</h2>
+<figure style="width: 100%; clear: both;">
+    <div style="display: flex; justify-content: center; width: 50%;">
+       <img src="https://syw.under.jp/img/DER_videojuegos.png" align="center">
+    </div>
+    <figcaption><i>Representación gráfica Diagrama Entidad Relación dataset videojuegos</i>.</figcaption>
+</figure>
+<h2 id="5-contenido">5. Contenido</h2>
+<ul>
+<li>Variables: Las variables incluidas en el dataset son:
+<ul>
+<li>ID: Identificador único del videojuego en la plataforma web.</li>
+<li>Título: Nombre del videojuego.</li>
+<li>Loose: Precio del videojuego en estado &quot;loose&quot; (sin caja original).</li>
+<li>CIB: Precio del videojuego &quot;complete in box&quot; (con caja original).</li>
+<li>New: Precio del videojuego nuevo.</li>
+<li>Plataforma: Consola para la que está disponible el videojuego (Xbox One o Xbox Series X). <strong>El script puede adaptarse para descargar datos de otras plataformas.</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="6-propietario">6. Propietario</h2>
+<p>El propietario de los datos extraídos en este trabajo es <a href="http://Pricecharting.com">Pricecharting.com</a>, una plataforma web que proporciona información sobre precios de videojuegos.<br>
+El dominio <a href="http://Pricecharting.com">Pricecharting.com</a> está registrado a nombre de <em>Squarespace Domains II LLC</em>.</p>
+<p>Para asegurar el cumplimiento de los principios éticos y legales en este proyecto, se han realizado las siguientes acciones:</p>
+<ul>
+<li>
+<p>Análisis de robots.txt: Se ha revisado el archivo robots.txt de <a href="http://Pricecharting.com">Pricecharting.com</a> para identificar posibles restricciones al acceso a la información. El análisis reveló que no existen limitaciones para la extracción de datos de precios de videojuegos.</p>
+</li>
+<li>
+<p>Revisión de los términos de uso: Se han consultado los términos de uso de <a href="http://Pricecharting.com">Pricecharting.com</a> para verificar que la actividad de scraping realizada en este trabajo no infringe ninguna de sus cláusulas. Los términos de uso permiten la extracción de datos para fines no comerciales, siempre que se realice de forma responsable y sin sobrecargar el servidor.</p>
+</li>
+<li>
+<p>Limitación de la frecuencia de peticiones: Para evitar la sobrecarga del servidor, el script de scraping implementa un retraso de X segundos entre cada petición siempre que ello ha sido necesario.</p>
+</li>
+<li>
+<p>Uso académico de los datos: Los datos extraídos se utilizarán exclusivamente para fines académicos en el contexto de la asignatura &quot;Tipología y ciclo de vida de los datos&quot;. No se prevé ningún uso comercial de los datos.</p>
+</li>
+</ul>
+<p>La extracción de datos de <a href="http://Pricecharting.com">Pricecharting.com</a> se justifica por la necesidad de obtener información actualizada y precisa sobre los precios de los videojuegos para las consolas Xbox One y Xbox Series X.  Esta información es fundamental para el análisis de precios y tendencias en el mercado de videojuegos, y no está disponible de forma tan completa y estructurada en otras fuentes.</p>
+<h2 id="7-inspiración">7. Inspiración</h2>
+<p>Este conjunto de datos puede resultar de gran interés para diversos análisis e investigaciones en el ámbito de los videojuegos y la economía. Su valor radica en la información detallada que proporciona sobre los precios de los videojuegos en diferentes estados de conservación (loose, CIB, new) y plataformas (Xbox One y Xbox Series X).</p>
+<p>A partir de este conjunto de datos, se pueden plantear las siguientes preguntas de investigación:</p>
+<ul>
+<li>
+<p><strong>¿Existe una diferencia significativa en los precios de los videojuegos entre las plataformas Xbox One y Xbox Series X?</strong>  Se podría analizar si los juegos más recientes o con mayor demanda tienen un precio mayor en la plataforma más nueva.</p>
+</li>
+<li>
+<p><strong>¿Cómo varían los precios de los videojuegos en función de su estado de conservación?</strong> Se podría comparar la diferencia de precio entre juegos loose, CIB y new, y determinar si existen patrones o factores que influyen en estas variaciones.</p>
+</li>
+<li>
+<p><strong>¿ Podemos identificar joyas o futuros juegos revalorizables?</strong> ¿Se podría establecer o listar videojuegos que sean susceptibles de revalorización?</p>
+</li>
+<li>
+<p><strong>¿Se puede predecir la evolución futura de los precios de los videojuegos a partir de los datos históricos?</strong>  Se podrían desarrollar modelos predictivos para estimar el valor futuro de los juegos.</p>
+</li>
+</ul>
+<p><strong>Comparación con análisis anteriores:</strong></p>
+<p>Aunque no se disponen de análisis previos específicos sobre este conjunto de datos, existen estudios similares en el ámbito de la economía de los videojuegos que han abordado algunas de estas preguntas. Por ejemplo, investigaciones previas han analizado la influencia de la popularidad, la crítica y la escasez en los precios de los videojuegos retro (consolas antiguas) (Goh et al., 2023; Writer, 2023).  Este conjunto de datos permitiría realizar análisis para consolas modernas como <em>Xbox One</em> y <em>Xbox Series X</em>, y servir como guía.</p>
+<p>Además, este conjunto de datos ofrece la posibilidad de realizar análisis novedosos, como la comparación de precios entre diferentes estados de conservación (loose, CIB, new) y la predicción de la evolución futura de los precios.  Estos análisis podrían aportar información valiosa para coleccionistas, vendedores y compradores de videojuegos, así como para investigadores interesados en la economía de los videojuegos.</p>
+<h2 id="8-licencia">8. Licencia</h2>
+<p>En este proyecto, se han considerado cuidadosamente las licencias para el dataset y el código fuente, con el objetivo de promover el acceso abierto a la información y al mismo tiempo respetar los derechos de los creadores de los datos.</p>
+<h3 id="dataset">Dataset</h3>
+<p>El dataset resultante de este proyecto se publicará bajo la licencia CC0: Public Domain License.  Esta licencia renuncia a todos los derechos de autor y coloca los datos en el dominio público, permitiendo su uso, modificación y distribución sin restricciones, incluso para fines comerciales. La elección de CC0 se basa en los siguientes principios:</p>
+<ul>
+<li>
+<p>Reconocimiento del origen de los datos: Los datos extraídos provienen de <a href="https://www.pricecharting.com/">Pricecharting.com</a>, un sitio web que ofrece información pública sobre precios de videojuegos.<br>
+Al liberar el dataset al dominio público, se reconoce que los datos originales no son propiedad del autor de este proyecto.</p>
+</li>
+<li>
+<p>Promoción del acceso abierto: CC0 facilita el acceso y la reutilización de los datos, fomentando la investigación, el análisis y la creación de nuevas aplicaciones.</p>
+</li>
+<li>
+<p>Limitación de la extracción de datos: Como <a href="http://Pricecharting.com">Pricecharting.com</a> ofrece una API premium para acceder a sus datos, se ha limitado la cantidad de información extraída para este proyecto, como muestra de respeto a su modelo de negocio.</p>
+</li>
+</ul>
+<h3 id="código-fuente">Código Fuente</h3>
+<p>El código fuente del proyecto se publicará bajo la licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en">CC BY-NC-SA 4.0.</a> Esta licencia permite la reutilización y modificación del código, siempre que se atribuya el crédito al autor original, no se utilice para fines comerciales y se compartan las modificaciones bajo la misma licencia.  Esta elección se justifica por el deseo de proteger la autoría del código y al mismo tiempo permitir su uso en contextos académicos y no comerciales.</p>
+<h2 id="9-código">9. Código</h2>
+<p>El código resultante para realizar <em>Web Scraping</em> ha pretendido en todo momento aplicar los conceptos impartidos en la asignatura.</p>
+<p>Por un lado, de cara a obtener los enlaces a las diferentes plataformas de videojuegos de consola, se ha construido una función modularizada 'link_crawler' empleando el material didáctico complementario de la asignatura (Penman, 2015), como puede observarse:</p>
+<pre><code>def link_crawler(seed_url, link_regex):
+    crawl_queue = [seed_url]
+    visited = set()
+    enlaces = []
+
+    while crawl_queue:
+        url = crawl_queue.pop()
+        if url in visited:
+            continue
+        visited.add(url)
+
+        html = download(url)
+        if html is None:
+            continue
+        
+        soup = BeautifulSoup(html, 'html.parser')
+        for link in soup.find_all('a', href=True):
+            href = link['href']
+            full_url = urljoin(url, href)
+            if re.match(link_regex, href):
+                enlaces.append(full_url)
+                print(&quot;Añadiendo enlace:&quot;, full_url)
+
+    return enlaces
+</code></pre>
+<p>En cuanto a la función <code>download</code> incluida en el <em>Crawler</em>, observamos que maneja errores y reintentos. Establece un retardo entre peticiones y la posibilidad de modificar el 'user_agent', como puede observarse:</p>
+<pre><code>def download(url, user_agent='Mozilla/5.0', retries=2):
+    print('Downloading:', url)
+    headers = {'User-agent': user_agent}
+    req = urllib.request.Request(url, headers=headers)
+
+    try:
+        # 'Tiempo fuera' para evitar bloqueos prolongados
+        html = urllib.request.urlopen(req, timeout=10).read()
+    except urllib.error.HTTPError as e:
+        print('HTTP Error:', e.code, e.reason)
+        html = None
+    except urllib.request.URLError as e:
+        print('Download error:', e.reason)
+        html = None
+        if retries &gt; 0 and hasattr(e, 'code') and 500 &lt;= e.code &lt; 600:
+            # Reintento para errores 5xx
+            return download(url, user_agent, retries - 1)
+    # Retraso para evitar bloqueos
+    time.sleep(1)
+    return html
+</code></pre>
+<p>Con base a los enlaces obtenidos por nuestro <em>link_crawler</em>, otra función crea un archivo <em>.csv</em>:</p>
+<pre><code>def generar_csv(enlaces, nombre_archivo):
+    # Obtenemos la fecha actual en formato YYYYMMDD
+    fecha_actual = strftime(&quot;%Y%m%d&quot;)
+    # Construimos el nombre del archivo con la fecha
+    nombre_archivo_con_fecha = f&quot;{nombre_archivo[:-4]}_{fecha_actual}.csv&quot;  
+
+    # Construimos la ruta completa al archivo en la carpeta 'pricecharting'
+    ruta_archivo = os.path.join('pricecharting', nombre_archivo_con_fecha)  
+    df = pd.DataFrame(enlaces)
+    # Guardamos el archivo CSV
+    df.to_csv(ruta_archivo, index=False)
+    print(f&quot;Se han guardado {len(enlaces)} enlaces en el archivo '{nombre_archivo_con_fecha}'.\n&quot;)
+</code></pre>
+<p>Extraemos el enlace desde el listado resultante:</p>
+<pre><code># URL base de la página
+# Filtramos los enlaces que contengan la palabra &quot;xbox-one&quot;
+base_url = enlaces_price_charting[enlaces_price_charting['enlaces'].str.contains(&quot;xbox-one&quot;, case=False)]
+base_url = base_url['enlaces'].iloc[0] if not base_url.empty else None
+</code></pre>
+<p>Y descargamos y procesamos los precios con otras dos funciones modulares utilizando <code>request_html</code> en una sesión HTML:</p>
+<pre><code>from requests_html import HTMLSession
+
+def download_pc(url, session=HTMLSession()):
+    # Parámetros base peticiones
+    params = {
+        &quot;sort&quot;: &quot;&quot;,
+        &quot;when&quot;: &quot;none&quot;,
+        &quot;release-date&quot;: &quot;2024-10-31&quot;,
+        &quot;format&quot;: &quot;json&quot;
+    }
+
+    # Valor inicial del cursor
+    cursor = 0
+
+    # Lista para almacenar los datos de los productos
+    products_data = []
+
+    # Bucle para cargar páginas de productos (videojuegos)
+    while True:
+        # Actualizamos el valor del cursor
+        cursor += 50
+        params[&quot;cursor&quot;] = cursor
+
+        # Realizamos la petición desde la URL base
+        # con los parámetros de la petición
+        response = session.get(url, params=params)
+
+        # Si la petición es exitosa
+        if response.status_code == 200:
+            try:
+                # Convertimos la respuesta a JSON
+                data = response.json()
+
+                # Si no hay más productos, salimos del bucle
+                if not data[&quot;products&quot;]:
+                    break
+
+                # Iteramos sobre los productos y extraemos los datos
+                for product in data[&quot;products&quot;]:
+                    product_data = extract_product_data(product)
+                    products_data.append(product_data)
+
+            except ValueError:
+                print(f&quot;Error al procesar la respuesta JSON: {response.content}&quot;)
+                break
+
+        else:
+            print(f&quot;Error en la petición: {response.status_code}&quot;)
+            break
+
+    return products_data
+
+def extract_product_data(product):
+    product_id = product[&quot;id&quot;]
+    title = product[&quot;productName&quot;]
+    loose_price = product[&quot;price1&quot;]
+    cib_price = product[&quot;price2&quot;]
+    new_price = product[&quot;price3&quot;]
+    return product_id, title, loose_price, cib_price, new_price
+</code></pre>
+<p>Cabe destacar que ha sido preciso adaptar el código a la estructura de las peticiones XDR antes estudiadas para facilitar la carga dinámica de todos los resultados:</p>
+<pre><code>[...]
+params = {
+        &quot;sort&quot;: &quot;&quot;,
+        &quot;when&quot;: &quot;none&quot;,
+        &quot;release-date&quot;: &quot;2024-10-31&quot;,
+        &quot;format&quot;: &quot;json&quot;
+    }
+[...]
+response = session.get(url, params=params)
+[...]
+</code></pre>
+<p>y con ayuda de otra función procesamos el contenido:</p>
+<pre><code>def extract_product_data(product):
+    product_id = product[&quot;id&quot;]
+    title = product[&quot;productName&quot;]
+    loose_price = product[&quot;price1&quot;]
+    cib_price = product[&quot;price2&quot;]
+    new_price = product[&quot;price3&quot;]
+    return product_id, title, loose_price, cib_price, new_price
+</code></pre>
+<p>Con otra función creamos el dataset que incluye la fecha del sistema:</p>
+<pre><code>def generar_csv_precios_v3(nombre_archivo, datos, nombres_columnas, plataforma):
+    fecha_actual = strftime(&quot;%Y%m%d&quot;)
+    nombre_archivo_con_fecha = f&quot;{nombre_archivo[:-4]}_{plataforma}_{fecha_actual}.csv&quot;
+
+    # Obtenemos la ruta del directorio actual
+    directorio_actual = os.path.dirname(os.path.abspath(__file__))
+
+    # Construimos la ruta al directorio 'dataset' un nivel por encima
+    ruta_dataset = os.path.join(directorio_actual, '..', '..', 'dataset')
+
+    # Creamos el directorio 'dataset' si no existe
+    os.makedirs(ruta_dataset, exist_ok=True)
+
+    # Construimos la ruta completa al archivo en la carpeta 'dataset'
+    ruta_archivo = os.path.join(ruta_dataset, nombre_archivo_con_fecha)
+
+    print(f&quot;Directorio actual: {directorio_actual}\n&quot;)
+    print(f&quot;Ruta final del archivo CSV: {ruta_archivo}\n&quot;)
+
+    with open(ruta_archivo, 'w', newline='', encoding='utf-8') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(nombres_columnas)  # Escribimos la cabecera
+        writer.writerows(datos)  # Escribimos los datos
+        print(f&quot;Se han guardado los datos en el archivo '{nombre_archivo_con_fecha}'.\n&quot;)
+
+</code></pre>
+<p>A continuación, se agrega una columna cuyo contenido depende del sistema de consola del que hayamos descargado los datos y se salva tanto en formato <em>.csv</em> como en un dataframe de <code>pandas</code>.</p>
+<p>El último paso es crear un dataset unificado desde datasets de <code>pandas</code>:</p>
+<pre><code>df = pd.concat([df_precios_xbox_one, df_precios_xbox_series_x], ignore_index=True)
+df.to_csv(os.path.join(ruta_dataset, 'videojuegos_xbox.csv'), index=False)
+</code></pre>
+<p>Concluyendo en un dataset que incluiría diferentes precios de todos los videojuegos de consolas <em>Xbox one</em> y <em>Xbox series X</em> disponibles en <a href="http://www.pricecharting.com/es/">www.pricecharting.com/es/</a></p>
+<p>El enlace al repositorio:<br>
+<a href="https://github.com/Kamaranis/Web-Scraping-de-videojuegos-con-potencial-de-revalorizacion">https://github.com/Kamaranis/Web-Scraping-de-videojuegos-con-potencial-de-revalorizacion</a></p>
+<h2 id="10-dataset">10. Dataset</h2>
+<ul>
+<li>Barrera Mora, A. (2024). Listado de videojuegos de XBOX susceptibles de revalorización [Data set]. Zenodo. <a href="https://doi.org/10.5281/zenodo.14043146">https://doi.org/10.5281/zenodo.14043146</a></li>
+</ul>
+<p>Link para <a href="https://zenodo.org/records/14043146?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjBlOTZhZjlkLWQxMTUtNGJiOS05OWE5LTlhNjI2NGMzODA1OCIsImRhdGEiOnt9LCJyYW5kb20iOiJkZDNjMTI3ZDE5NDUwMWZjNmNlNGIxMjVhNDQyNzYzOSJ9.t-HUzys5CUTRSqVTeBlCLlTLrSNeJQKvRYtbPrpcqoYOWvCO3pJR3SSqsCWl7l0FJIoofBaPTH4zA-RorkJfcA">visualización del dataset.</a></p>
+<h2 id="11-video">11. Video</h2>
+<h2 id="bibliografía">Bibliografía</h2>
+<ul>
+<li>
+<p>Barrera Mora, A. (2024). Listado de videojuegos de XBOX susceptibles de revalorización [Dataset]. Zenodo. <a href="https://doi.org/10.5281/zenodo.14043146">https://doi.org/10.5281/zenodo.14043146</a></p>
+</li>
+<li>
+<p>Chouinard, J.-C. (2023, junio 2). Web Scraping With Python and Requests-HTML (with Example). JC Chouinard. <a href="https://www.jcchouinard.com/web-scraping-with-python-and-requests-html/">https://www.jcchouinard.com/web-scraping-with-python-and-requests-html/</a></p>
+</li>
+<li>
+<p>FAQ and Help for PriceCharting. (s. f.). PriceCharting. Recuperado 6 de noviembre de 2024, de <a href="https://www.pricecharting.com/faq#prices">https://www.pricecharting.com/faq#prices</a></p>
+</li>
+<li>
+<p>Goh, E., Al-Tabbaa, O., &amp; Khan, Z. (2023). Unravelling the complexity of the Video Game Industry: An integrative framework and future research directions. Telematics and Informatics Reports, 12, 100100. <a href="https://doi.org/10.1016/j.teler.2023.100100">https://doi.org/10.1016/j.teler.2023.100100</a></p>
+</li>
+<li>
+<p>Penman, R. (2015). Web scraping with python : Successfully scrape data from any website with the power of python. Packt Publishing, Limited.</p>
+</li>
+<li>
+<p>PriceCharting | Price Guides for Games, Cards &amp; Comics. (s. f.). PriceCharting. Recuperado 6 de noviembre de 2024, de <a href="https://www.pricecharting.com/">https://www.pricecharting.com/</a></p>
+</li>
+<li>
+<p>Requests-HTML: HTML Parsing for Humans (writing Python 3)! —Requests-HTML v0.3.4 documentation. (s. f.). Recuperado 6 de noviembre de 2024, de <a href="https://requests-html.kennethreitz.org/">https://requests-html.kennethreitz.org/</a></p>
+</li>
+<li>
+<p>Writer, K. T. / Y. S. S. (2023, febrero 18). Japan Vintage Video Games Growing in Popularity Among Youngsters, Foreigners. <a href="https://japannews.yomiuri.co.jp/business/economy/20230218-92012/">https://japannews.yomiuri.co.jp/business/economy/20230218-92012/</a></p>
+</li>
+</ul>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>
