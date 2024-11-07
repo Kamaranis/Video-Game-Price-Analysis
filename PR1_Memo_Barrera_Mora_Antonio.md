@@ -5,8 +5,26 @@
     <figcaption><i><b>Alumno</b>: Anton Barrera Mora (abarreramoraùoc.edu)</i>.</figcaption>
 </figure>
 
-
 # ¿Cómo podemos capturar los datos de la web?
+
+**Sitio web escogido para web scraping:**  
+https://www.pricecharting.com/es/
+
+**Dataset en Zenodo:**  
+https://doi.org/10.5281/zenodo.14043146
+
+**Repositorio en GitHub:**  
+https://github.com/Kamaranis/Web-Scraping-de-videojuegos-con-potencial-de-revalorizacion.git
+
+Invitación para *jmoreiras-uoc* GitHub:  
+https://github.com/Kamaranis/Web-Scraping-de-videojuegos-con-potencial-de-revalorizacion/invitations
+
+**Video presentación en Google Drive de la UOC:**  
+https://drive.google.com/file/d/1PB7gAi-zFeUey35RGmEGJwlCjwKJDR8E/view?usp=drive_link
+
+En caso de que presente problemas, adjunto enlace a la carpeta donde de Google Drive donde esta contenido el video (se ha concedido permisos a jmoreiras@uoc.edu):
+
+https://drive.google.com/drive/folders/1MbdzbXIaVSWZA0eO7XRL1pcy78sTT_7Q?usp=drive_link
 
 #### Indice
 
@@ -33,7 +51,8 @@
 
 
 ## 1. Contexto
-En este apartado describiremos de forma general, el proceso seguido para desarrollar el presente trabajo de Web Scraping.  
+
+En este apartado describiremos de forma general, el proceso seguido para desarrollar el presente trabajo de Web Scraping para la PR1.  
 
 Este proyecto nació con un enfoque lúdico, orientado a realizar **web scraping** en sitios web del ámbito del entretenimiento (videojuegos, juegos de mesa, libros y cartas coleccionables). Esta elección temática responde a un interés personal por explorar áreas más recreativas, como contrapunto a la actividad profesional cotidiana en el sector IT.
 
@@ -377,13 +396,13 @@ El análisis preliminar llevado a cabo con el objetivo de evaluar la factibilida
 *   **Consideración de medidas anti-scraping:**  La presencia de medidas anti-scraping y uso de técnicas para evitar el bloqueo, como proxies y rotación de user-agents no queda descartado
 *   **Respeto a las limitaciones de acceso:**  Es fundamental respetar las limitaciones de acceso y utilizar técnicas de web scraping éticas y responsables.
 
-Finalizamos este apartado reseñando que con toda la información analizada, **nos decantamos por realizar Web Scrap sobre el sitio web  
- [www.pricecharting.com](https://www.pricecharting.com/es/)**  
+Finalizamos este apartado reseñando que con toda la información analizada, **nos decantamos por realizar Web Scrap sobre el sitio web
+ [www.pricecharting.com](https://www.pricecharting.com/es/)**
  con base en que los datos que ofrece son relevantes para realizar diferentes trabajos de valoración de videojuegos, evolución de precios y los aspectos tanto técnicos como éticos son abordables.
 
 ## 2. Título
 
-Web Scraping de Videojuegos con potencial de revalorización
+**Web Scraping de Videojuegos con potencial de revalorización**
 
 ## 3. Descripción del dataset
 
@@ -409,8 +428,8 @@ Para nuestro *"Análisis de la revalorización de videojuegos mediante web scrap
 
 **Metodología:**
 
-- Se realizó web scraping del sitio web Pricecharting.com para obtener información sobre los precios de los videojuegos.
-- Se utilizó la librería `Requests-HTML` de Python para extraer los datos.
+- Se realizó web scraping del sitio web Pricecharting.com para obtener primero los enlaces relevantes y luego se capturó información sobre los precios de los videojuegos.
+- Se empleó la librería `Requests-HTML` de Python para extraer los datos.
 - El porcentaje de revalorización se calculará como la diferencia entre el precio actual y el precio de lanzamiento, dividida entre el precio de lanzamiento.
 - Se crearán gráficos de líneas para visualizar la evolución de los precios a lo largo del tiempo, y gráficos de barras para comparar la revalorización entre diferentes juegos.
 
@@ -579,7 +598,8 @@ base_url = enlaces_price_charting[enlaces_price_charting['enlaces'].str.contains
 base_url = base_url['enlaces'].iloc[0] if not base_url.empty else None
 ```
 
-Y descargamos y procesamos los precios con otras dos funciones modulares utilizando `request_html` en una sesión HTML:
+El principal problema a abordar fue que Pricecharting.com utiliza la técnica de *"scroll infinito"* para cargar los productos de forma dinámica a medida que el usuario se desplaza por la página. Esto complicó la extracción de datos, ya que no estaban disponibles en el HTML inicial.  
+Descargamos y procesamos los precios con otras dos funciones modulares utilizando `request_html` en una sesión HTML:
 
 ```
 from requests_html import HTMLSession
@@ -643,7 +663,7 @@ def extract_product_data(product):
     return product_id, title, loose_price, cib_price, new_price
 ```
 
-Cabe destacar que ha sido preciso adaptar el código a la estructura de las peticiones XDR antes estudiadas para facilitar la carga dinámica de todos los resultados:
+La solución por tanto consistió en analizar el comportamiento de la página e identificar las peticiones 'XHR' enviadas al servidor para cargar más productos al hacer scroll. Estas peticiones se simularon con la librería Requests-HTML, lo que permitió obtener todos los datos de manera eficiente, como ha podido observarse en el extracto de los diferentes retazos de código, implementando los parámetros propios de las peticiones en una variable 'params' y llamando con `session.get(url, params=params)`:
 
 ```
 [...]
@@ -658,7 +678,7 @@ response = session.get(url, params=params)
 [...]
 ```
 
-y con ayuda de otra función procesamos el contenido:
+Con ayuda de otra función procesamos el contenido:
 
 ```
 def extract_product_data(product):
@@ -700,9 +720,10 @@ def generar_csv_precios_v3(nombre_archivo, datos, nombres_columnas, plataforma):
 
 ```
 
-A continuación, se agrega una columna cuyo contenido depende del sistema de consola del que hayamos descargado los datos y se salva tanto en formato *.csv* como en un dataframe de `pandas`.
+A continuación, el script agrega una columna cuyo contenido depende del sistema de consola del que hayamos descargado los datos y se salva tanto en formato *.csv* como en un dataframe de `pandas`.
+También utilizamos funciones como `os` para guardar los resultados de acuerdo a los lineamentos de directorios propuestos en la practica.
 
-El último paso es crear un dataset unificado desde datasets de `pandas`:
+El último paso sería crear un dataset unificado desde datasets de `pandas`:
 
 ```
 df = pd.concat([df_precios_xbox_one, df_precios_xbox_series_x], ignore_index=True)
@@ -711,17 +732,22 @@ df.to_csv(os.path.join(ruta_dataset, 'videojuegos_xbox.csv'), index=False)
 
 Concluyendo en un dataset que incluiría diferentes precios de todos los videojuegos de consolas *Xbox one* y *Xbox series X* disponibles en www.pricecharting.com/es/
 
-El enlace al repositorio:  
-https://github.com/Kamaranis/Web-Scraping-de-videojuegos-con-potencial-de-revalorizacion
+La estructura de la página de Pricecharting.com es susceptible de cambiar en el futuro, lo cual podría afectar el funcionamiento del script de scraping. Para poder mantener el script funcional, se documentó detalladamente el proceso de scraping y se identificaron los elementos clave necesarios para la extracción de datos. Esto permitirá una rápida adaptación del script en caso de cambios en la estructura del sitio. 
+
+Se implementaron mecanismos para limitar la frecuencia de las solicitudes, incluyendo retardos entre las peticiones y la rotación de user-agents para simular distintos navegadores y reducir la probabilidad de ser bloqueado, aunque no hayamos encontrado dificultades ni bloqueos en el proceso.
+
+Finalmente, tuvimos que abordar diversos problemas ya que suelo trabajar sobre 'Dev Containers' del IDE VSCode, aspecto este último que complicaba sobremanera el trabajo de scraping al tener que incorporar los "WebDrivers" al *stack*.
+
+**Repositorio en GitHub:**  
+https://github.com/Kamaranis/Web-Scraping-de-videojuegos-con-potencial-de-revalorizacion.git
 
 ## 10. Dataset
 
 - Barrera Mora, A. (2024). Listado de videojuegos de XBOX susceptibles de revalorización [Data set]. Zenodo. https://doi.org/10.5281/zenodo.14043146
 
-Link para [visualización del dataset.](https://zenodo.org/records/14043146?token=eyJhbGciOiJIUzUxMiJ9.eyJpZCI6IjBlOTZhZjlkLWQxMTUtNGJiOS05OWE5LTlhNjI2NGMzODA1OCIsImRhdGEiOnt9LCJyYW5kb20iOiJkZDNjMTI3ZDE5NDUwMWZjNmNlNGIxMjVhNDQyNzYzOSJ9.t-HUzys5CUTRSqVTeBlCLlTLrSNeJQKvRYtbPrpcqoYOWvCO3pJR3SSqsCWl7l0FJIoofBaPTH4zA-RorkJfcA)
-
 ## 11. Video
 
+https://drive.google.com/file/d/1PB7gAi-zFeUey35RGmEGJwlCjwKJDR8E/view?usp=drive_link
 
 ## Bibliografía
 
