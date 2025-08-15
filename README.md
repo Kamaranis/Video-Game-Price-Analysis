@@ -1,6 +1,6 @@
-# Práctica 1 - Tipología y Ciclo de Vida de los Datos
+# Web Scraping de videojuegos con potencial de revalorización
 
-Asignatura: M2.851 / Semestre: 2024-1 / Fecha: 12-11-2024
+Fecha: 12-11-2024
 
 [![Current Version](https://img.shields.io/badge/version-1.0-green.svg)](https://github.com/Kamaranis/Web-Scraping-de-videojuegos-con-potencial-de-revalorizacion)
 
