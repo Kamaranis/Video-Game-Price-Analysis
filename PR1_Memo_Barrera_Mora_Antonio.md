@@ -1,11 +1,5 @@
-<figure style="width: 100%; clear: both;">
-    <div style="display: flex; justify-content: center; width: 100%;">
-       <img src="https://syw.under.jp/img/logo_PR1_tipologia.png" align="center">
-    </div>
-    <figcaption><i><b>Alumno</b>: Anton Barrera Mora (abarreramoraùoc.edu)</i>.</figcaption>
-</figure>
 
-# ¿Cómo podemos capturar los datos de la web?
+# Análisis del precio de videojuegos empleando Web Scraping
 
 **Sitio web escogido para web scraping:**  
 https://www.pricecharting.com/es/
@@ -16,15 +10,6 @@ https://doi.org/10.5281/zenodo.14043146
 **Repositorio en GitHub:**  
 https://github.com/Kamaranis/Web-Scraping-de-videojuegos-con-potencial-de-revalorizacion.git
 
-Invitación para *jmoreiras-uoc* GitHub:  
-https://github.com/Kamaranis/Web-Scraping-de-videojuegos-con-potencial-de-revalorizacion/invitations
-
-**Video presentación en Google Drive de la UOC:**  
-https://drive.google.com/file/d/1PB7gAi-zFeUey35RGmEGJwlCjwKJDR8E/view?usp=drive_link
-
-En caso de que presente problemas, adjunto enlace a la carpeta donde de Google Drive donde esta contenido el video (se ha concedido permisos a jmoreiras@uoc.edu):
-
-https://drive.google.com/drive/folders/1MbdzbXIaVSWZA0eO7XRL1pcy78sTT_7Q?usp=drive_link
 
 #### Indice
 

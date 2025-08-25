@@ -1,70 +1,64 @@
-# Web Scraping de videojuegos con potencial de revalorización
+# Web Scraping & Analysis of Video Game Revaluation Potential
 
-Fecha: 12-11-2024
+## 📄 Project Goal
 
-[![Current Version](https://img.shields.io/badge/version-1.0-green.svg)](https://github.com/Kamaranis/Web-Scraping-de-videojuegos-con-potencial-de-revalorizacion)
+This project is a comprehensive data engineering initiative designed to create a unique dataset for analyzing the economic value and appreciation potential of video games. The primary objective was to build a robust, ethical, and efficient web scraping pipeline to extract pricing data from `PriceCharting.com` for the Xbox One and Xbox Series X platforms.
 
-## Autor
-  * Anton Barrera Mora - [abarreramora@uoc.edu](abarreramora@uoc.edu)
+The final output is not just a script, but a structured, clean, and publicly available dataset published on Zenodo, ready for economic analysis, trend prediction, and data visualization.
 
-## Sitio web elegido
-[https://www.pricecharting.com](https://www.pricecharting.com)
+## ✨ A Methodical & Ethical Engineering Workflow
 
-## Enlace DOI Zenodo
-El dataset ha sido publicado en Zenodo con DOI [10.5281/zenodo.14043146](https://doi.org/10.5281/zenodo.0000000).
+This project was executed following a rigorous, multi-stage process that mirrors professional data engineering practices, emphasizing strategy and ethics over brute-force extraction.
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14043146.svg)](https://doi.org/10.5281/zenodo.14043146)
+### Stage 1: Feasibility Study and Source Vetting
 
-## Descripción del repositorio
+Before writing a single line of code, a thorough evaluation of potential data sources was conducted.
+*   **Source Analysis:** Multiple sites (e.g., VGChartz, SteamDB, PriceCharting) were initially considered.
+*   **Technical & Ethical Vetting:** Each site was evaluated for technical scraping feasibility (static vs. dynamic content, use of AJAX/PHP) and ethical/legal constraints through a careful analysis of their `robots.txt` files.
+*   **Source Selection:** `PriceCharting.com` was chosen for its relevant data and clear (though challenging) structure. This initial research phase ensured the project was viable and respectful of the source's infrastructure.
 
-Este repositorio contiene un script de Python para realizar web scraping de Pricecharting.com y obtener datos de precios de videojuegos de Xbox One y Xbox Series X.  El script extrae enlaces de videojuegos, descarga precios, genera archivos CSV y crea un dataset con información sobre ID, título, precios (loose, CIB, new) y plataforma.
+### Stage 2: Solving the Dynamic Content Challenge
 
-Para ejecutar el script, se necesita Python 3.x y las siguientes librerías: requests-html, pandas.  Se recomienda crear un entorno virtual e instalar las dependencias con `pip install -r requirements.txt`.
+The main technical challenge was that `PriceCharting.com` uses "lazy loading" (or infinite scroll) to load product data dynamically via JavaScript. A simple HTML request would not capture the full dataset.
+*   **Network Analysis:** Using browser Dev Tools, the XHR (XMLHttpRequest) requests sent by the frontend were identified and analyzed.
+*   **Request Simulation:** The final scraper does not brute-force the website. Instead, it simulates these JSON requests by iteratively calling the backend endpoint with the correct parameters (`cursor`, `format`, etc.).
+*   **Robust Implementation:** The solution was implemented using the `requests-html` library in Python to efficiently manage sessions and parse the JSON responses, making the extraction process clean and highly efficient.
 
-### Estructura
+### Stage 3: Ethical Scraping & Final Dataset Creation
 
-  * `/source/main.py`: Script principal.
-  * `/source/modulos/link_crawler.py`: Módulo para recopilar enlaces de plataformas de videojuegos.
-  * `/souce/modulos/download.py`: Módulo para descargar enlaces de plataformas de videojuegos.
-  * `/souce/modulos/download_pc.py`: Módulo para descargar precios de videojuegos.
-  *  `/souce/modulos/procesar_datos.py`: Módulo para tratar los datos recopilados en diferentes formas.
-  * `/source/requirements.txt`: Lista de paquetes utilizados (Python 3.12.4).
+The project was designed with a strong emphasis on ethical best practices.
+*   **Rate Limiting:** The script incorporates delays between requests to avoid overloading the server.
+*   **Compliance:** The scraper operates within the rules defined in the site's `robots.txt` and terms of use.
+*   **Data Publication:** The final, cleaned dataset of **2,369 video games** was structured and published on **Zenodo** under a CC0 (Public Domain) license, promoting open access for academic and research purposes.
 
-## Instrucciones
+## 📊 The Dataset
 
-### Instalación
+The resulting dataset (`videojuegos_xbox.csv`) contains the following features:
+*   `ID`: Unique product identifier from PriceCharting.
+*   `Título`: The name of the video game.
+*   `Loose_Price`, `CIB_Price`, `New_Price`: Prices for the game in different conditions (loose, complete in box, new).
+*   `Plataforma`: The console platform (Xbox One or Xbox Series X).
 
-Para instalar las dependencias del proyecto, ejecute:
+**DOI:** The dataset is formally published and citable via Zenodo: **[https://doi.org/10.5281/zenodo.14043146](https://doi.org/10.5281/zenodo.14043146)**
 
-```bash
-pip install -r requirements.txt
-```
+## 💻 Technologies Used
 
-### Ejecución
-```
-python main.py
-```
+*   **Language:** Python 3
+*   **Core Libraries:**
+    *   **`requests-html`**: For handling dynamic content and JavaScript-heavy sites.
+    *   **`BeautifulSoup4`**: For initial HTML parsing and link discovery.
+    *   **Pandas**: For data structuring, cleaning, and final CSV generation.
 
-## Tecnologías Utilizadas
+## 🚀 Getting Started
 
-- **Python**: Lenguaje de programación principal.
-- **Pandas**: Biblioteca de Python para manipulación y análisis de datos.
-- **requests_html**: Biblioteca de uso simplificado para la realización de *Web Scraping*
+The repository contains the full Python script and a detailed memo outlining the entire process.
+1.  **Clone the repository.**
+2.  Install the necessary libraries: `pandas`, `requests-html`, `beautifulsoup4`.
+3.  Examine the `link_crawler` and `download_pc` functions to understand the two-stage process of link discovery and data extraction.
 
-## LICENCIA
+## 👤 Author
 
-El código fuente del proyecto se publica bajo la licencia [CC BY-NC-SA 4.0.](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en).  
+**Antonio Barrera Mora**
 
-El dataset resultante de este proyecto se publica bajo la licencia **CC0: Public Domain License**.  
-
-## Reconocimientos
-
-**Reconocimiento del origen de los datos y aspectos éticos:**   
- Los datos extraídos provienen de [Pricecharting.com](https://www.pricecharting.com/), un sitio web que ofrece información pública sobre precios de videojuegos.  
- Al liberar el dataset al dominio público, se reconoce que los datos originales no son propiedad del autor de este proyecto.
-
-**Promoción del acceso abierto:**  
-CC0 facilita el acceso y la reutilización de los datos, fomentando la investigación, el análisis y la creación de nuevas aplicaciones.
-
-**Limitación de la extracción de datos:**  
-Como Pricecharting.com ofrece una API premium para acceder a sus datos, se ha limitado la cantidad de información extraída para este proyecto, como muestra de respeto a su modelo de negocio.
+*   **LinkedIn:** https://www.linkedin.com/in/anbamo/
+*   **GitHub:** @Kamaranis
